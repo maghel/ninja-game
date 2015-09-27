@@ -22,14 +22,20 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			
 	@Override
 	public void start() {
-		player = new Ninja();
-		
+		initObjects();
 		loadMap();
-				
+		startthread();
+	}
+	
+	private void startthread() {
 		Thread thread = new Thread(this);
 		thread.start();
 	}
-	
+
+	private void initObjects() {
+		player = new Ninja();
+	}
+
 	private void loadMap() {
 		mapLoader = new MapLoader(this);
 		// Initialize Tiles
@@ -50,10 +56,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Ninja game");
 		
-		playerImgRight = loadImage("ninja_right.png");
-		playerImgLeft = loadImage("ninja_left.png");
-		playerImgDuckLeft = loadImage("ninja_duck_left.png");
-		playerImgDuckRight = loadImage("ninja_duck_right.png");
+		initImages();
 		
 		anim = new Animation();
 		anim.addFrame(playerImgRight, 1250);
@@ -61,6 +64,13 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		currentSprite = anim.getImage();
 	}
 	
+	private void initImages() {
+		playerImgRight = loadImage("ninja_right.png");
+		playerImgLeft = loadImage("ninja_left.png");
+		playerImgDuckLeft = loadImage("ninja_duck_left.png");
+		playerImgDuckRight = loadImage("ninja_duck_right.png");
+	}
+
 	public Image loadImage(String img) {
 		
 		URL base = null;
