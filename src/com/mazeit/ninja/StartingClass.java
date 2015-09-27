@@ -15,7 +15,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private URL base;
-	private Image playerImg, playerImgRight, playerImgLeft, currentSprite;
+	private Image currentSprite, playerImgRight, playerImgLeft, playerImgDuckLeft, playerImgDuckRight;
 	private com.mazeit.ninja.framework.Animation anim;
 	private Ninja player;
 	private MapLoader mapLoader = null;
@@ -52,6 +52,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 		playerImgRight = loadImage("ninja_right.png");
 		playerImgLeft = loadImage("ninja_left.png");
+		playerImgDuckLeft = loadImage("ninja_duck_left.png");
+		playerImgDuckRight = loadImage("ninja_duck_right.png");
 		
 		anim = new Animation();
 		anim.addFrame(playerImgRight, 1250);
@@ -88,7 +90,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(playerImg, player.getCenterX(),
+		g.drawImage(currentSprite, player.getCenterX(),
 				player.getCenterY(), this);
 		
 		paintTiles(g);
@@ -106,12 +108,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 			case KeyEvent.VK_LEFT:
 				player.moveLeft();
-				playerImg = playerImgLeft;
+				currentSprite = playerImgLeft;
 				break;
 	
 			case KeyEvent.VK_RIGHT:
 				player.moveRight();
-				playerImg = playerImgRight;
+				currentSprite = playerImgRight;
 				break;
 				
 			case KeyEvent.VK_UP:
@@ -119,7 +121,14 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				break;	
 			
 			case KeyEvent.VK_DOWN:
-				player.moveDown();
+				//player.moveDown();
+				if(currentSprite == playerImgLeft) {
+					currentSprite = playerImgDuckLeft;
+				}
+				else {
+					currentSprite = playerImgDuckRight;
+				}
+						
 				break;	
 		}	
 	}
