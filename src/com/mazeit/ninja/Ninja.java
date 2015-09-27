@@ -3,8 +3,8 @@ package com.mazeit.ninja;
 public class Ninja {
 
 	private static final int MOVE_SPEED = 2;
-	private int centerX = 10;
-	private int centerY = 10;
+	private int centerX = 100;
+	private int centerY = 270;
 	
 	private int speedX = 0;
 	private int speedY = 0;
