@@ -117,7 +117,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				break;
 				
 			case KeyEvent.VK_UP:
-				player.moveUp();
+				if(currentSprite == playerImgDuckLeft) {
+					currentSprite = playerImgLeft;
+				}
+				else {
+					currentSprite = playerImgRight;
+				}
 				break;	
 			
 			case KeyEvent.VK_DOWN:
