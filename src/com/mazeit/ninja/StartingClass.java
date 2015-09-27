@@ -60,7 +60,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 		anim = new Animation();
 		anim.addFrame(playerImgRight, 1250);
-		
 		currentSprite = anim.getImage();
 	}
 	
