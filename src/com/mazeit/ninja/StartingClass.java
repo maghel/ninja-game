@@ -20,6 +20,10 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private Ninja player;
 	private MapLoader mapLoader = null;
 			
+	enum DIRECTION {
+		LEFT, RIGHT;
+	}
+	
 	@Override
 	public void start() {
 		initObjects();
@@ -71,7 +75,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	}
 
 	public Image loadImage(String img) {
-		
 		URL base = null;
 		try {
 			base = getDocumentBase();
@@ -83,11 +86,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void run() {
-		
 		while (true) {
 			player.update();
 			updateTiles();
-			
 			repaint();
 			try {
 				Thread.sleep(17);
@@ -101,7 +102,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void paint(Graphics g) {
 		g.drawImage(currentSprite, player.getCenterX(),
 				player.getCenterY(), this);
-		
 		paintTiles(g);
 	}
 	
@@ -126,7 +126,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				break;
 				
 			case KeyEvent.VK_UP:
-				if(currentSprite == playerImgDuckLeft) {
+				if( player.getXDirection() == DIRECTION.LEFT) {
 					currentSprite = playerImgLeft;
 				}
 				else {
@@ -135,14 +135,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				break;	
 			
 			case KeyEvent.VK_DOWN:
-				//player.moveDown();
-				if(currentSprite == playerImgLeft) {
+				if(player.getXDirection() == DIRECTION.LEFT) {
 					currentSprite = playerImgDuckLeft;
 				}
 				else {
 					currentSprite = playerImgDuckRight;
 				}
-						
 				break;	
 		}	
 	}
@@ -185,5 +183,4 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			g.drawImage(t.getTileImage(), t.getTileX(), t.getTileY(), this);
 		}
 	}
-
 }

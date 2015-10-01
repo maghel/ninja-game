@@ -1,5 +1,7 @@
 package com.mazeit.ninja;
 
+import com.mazeit.ninja.StartingClass.DIRECTION;
+
 public class Ninja {
 
 	private static final int MOVE_SPEED = 2;
@@ -9,6 +11,16 @@ public class Ninja {
 	private int speedX = 0;
 	private int speedY = 0;
 	
+	private DIRECTION xDirection;
+	
+	public DIRECTION getXDirection() {
+		return xDirection;
+	}
+
+	public void setDirection(DIRECTION direction) {
+		this.xDirection = direction;
+	}
+
 	public int getCenterX() {
 		return centerX;
 	}
@@ -43,11 +55,13 @@ public class Ninja {
 
 
 	public void moveRight() {
+		xDirection = DIRECTION.RIGHT;
 		speedX = MOVE_SPEED;
 		speedY = 0;
 	}
 
 	public void moveLeft() {
+		xDirection = DIRECTION.LEFT;
 		speedX = -MOVE_SPEED;
 		speedY = 0;
 	}

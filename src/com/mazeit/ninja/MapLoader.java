@@ -56,8 +56,7 @@ public class MapLoader {
 					Tile t = new Tile(i, j, Character.getNumericValue(ch));
 					tilearray.add(t);
 				}
-
-			}
+		}
 		}
 
 	}
@@ -68,7 +67,6 @@ public class MapLoader {
 		tilegrassBot = startingClass.loadImage("tilegrassbot.png");
 		tilegrassLeft = startingClass.loadImage("tilegrassleft.png");
 		tilegrassRight = startingClass.loadImage("tilegrassright.png");
-		
 	}
 
 }
