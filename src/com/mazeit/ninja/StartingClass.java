@@ -20,7 +20,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private com.mazeit.ninja.framework.Animation anim;
 	private Ninja player;
 	private MapLoader mapLoader = null;
-			
+	private Animation ninjaAnimLeft, ninjaAnimRight;	
+	
 	enum DIRECTION {
 		LEFT, RIGHT;
 	}
@@ -75,6 +76,14 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		playerImgDuckRight = loadImage("ninja_duck_right.png");
 		playerImgHitLeft = loadImage("ninja_hit_left.png");
 		playerImgHitRight = loadImage("ninja_hit_right.png");
+		
+		ninjaAnimRight = new Animation();
+		ninjaAnimRight.addFrame(playerImgRight, 70);
+		ninjaAnimRight.addFrame(loadImage("ninja_right_2.png"), 70);
+		
+		ninjaAnimLeft = new Animation();
+		ninjaAnimLeft.addFrame(playerImgLeft, 70);
+		ninjaAnimLeft.addFrame(loadImage("ninja_left_2.png"), 70);
 	}
 
 	public Image loadImage(String img) {
@@ -92,6 +101,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		while (true) {
 			player.update();
 			updateTiles();
+			animate();
 			repaint();
 			try {
 				Thread.sleep(17);
@@ -108,6 +118,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		paintTiles(g);
 	}
 	
+	public void animate() {
+		ninjaAnimRight.update(10);
+		ninjaAnimLeft.update(10);
+	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		this.keyPressed(e);
@@ -120,12 +135,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 			case KeyEvent.VK_LEFT:
 				player.moveLeft();
-				currentSprite = playerImgLeft;
+				currentSprite = ninjaAnimLeft.getImage();
 				break;
 	
 			case KeyEvent.VK_RIGHT:
 				player.moveRight();
-				currentSprite = playerImgRight;
+				currentSprite = ninjaAnimRight.getImage();
 				break;
 				
 			case KeyEvent.VK_UP:
